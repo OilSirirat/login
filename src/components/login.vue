@@ -1,8 +1,27 @@
 <template>
-  <div class="hello">
-    <input type="text"  v-model="username" name="" value="">
-    <input type="password"  v-model="password" name="" value="">
-<button type="button" @click= "login()"name="button">login</button>
+  <div  id="login">
+    <img src="../assets/logo.png" width="50%"><br>
+    <div class="columns">
+      <div class="column">
+      </div>
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <input class="input is-success"  v-model="username" type="text" placeholder="Username">
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <div class="control">
+            <input class="input is-success" v-model="password" type="password" placeholder="Password">
+          </div>
+        </div>
+      </div>
+      <div class="column">
+      </div>
+    </div>
+<a class="button is-success"  @click= "login()">login</a>
   </div>
 </template>
 
@@ -42,18 +61,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+#login {
+  margin-top: 60px;
 }
 </style>

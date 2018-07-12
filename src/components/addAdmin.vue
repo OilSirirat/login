@@ -20,7 +20,7 @@
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            Menu
+            Admin
           </a>
           <div class="navbar-dropdown">
             <a class="navbar-item" @click= "href('/report')">
@@ -52,62 +52,74 @@
       </div>
     </div>
   </nav>
-<br><br>
-  <div class="columns">
-    <div class="column is-three-quarters" style="margin-left: 2%; width: 68%;">
-        <div class="columns">
-          <div class="column">
-            <div class="notification">
-              26 C <br> status
-            </div>
-          </div>
-          <div class="column">
-            <div class="notification" >
-              50% C <br> status
-            </div>
-          </div>
-          <div class="column">
-            <div class="notification">
-              Time Now <br>
-              12:12  4-10-2018
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="column">
-
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column is-three-quarters" style="margin-left: 2%; width: 68%;">
-      <div class="notification">
-        Time Now <br>
-        12:12  4-10-2018
-      </div>
-    </div>
-    <div class="column">
-      <div class="notification"  style="margin-right: 4%;">
-        <div class="field">
-          <div class="control">
-            <input class="input is-info is-rounded" type="text" placeholder="Start Time">
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <input class="input is-info is-rounded" type="text" placeholder="Stop Time">
-          </div>
-        </div>
-        <a class="button is-link is-rounded">Search</a>
-      </div>
-    </div>
-  </div>
-
-
-
 
   </div>
 <br><br><br>
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-four-fifths">
+      <div class="columns">
+      <div class="column is-two-thirds">
+        <article class="message  is-success">
+          <div class="message-header">
+            <p>Add Admin</p>
+          </div>
+          <div class="message-body">
+            <div class="field">
+              <div class="control">
+                <input class="input is-primary" type="text" v-model="data.uasrname" placeholder="Username">
+              </div>
+            </div><br>
+            <div class="field">
+              <div class="control">
+                <input class="input is-primary" type="text" v-model="data.password" placeholder="Username">
+              </div>
+            </div><br><br>
+            <a class="button is-success" @click = "add()">
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+              <span>Save</span>
+            </a>
+            </div>
+        </article>
+      </div>
+      <div class="column">
+        <article class="message is-success">
+          <div class="message-body">
+            <table >
+              <tr v-for ="(admin, key) in shadmin"  v-if = "sw !== key">
+                <td>{{admin.uasrname}}</td>
+                <!-- <td>{{admin.password}}</td> -->
+                <td> &nbsp; &nbsp; &nbsp;</td>
+                <td>  <a class="button is-success is-focused"@click = "swap(key)">Update</a></br></br></td>
+                <td> &nbsp;</td>
+                <td>  <a class="button is-danger is-focused"  @click = "Delete(key)" >Delete</a> <br><br></td>
+              </tr>
+                <tr v-else  >
+                  <td>
+                    <div class="field">
+                    <div class="control">
+                      <input class="input is-success" type="text" v-model="admin.uasrname">
+                    </div>
+                    </div>
+                  </td>
+                    <td> &nbsp; &nbsp; &nbsp;</td>
+                  <td>
+                    <a class="button is-focused"@click = "Update(key, admin.uasrname, admin.password)">Save</a> </br></br></td>
+                      <td> &nbsp;</td>
+                  <td>
+                      <a class="button is-danger is-focused" @click = "cancel()" >Cancle</a></br></br></td>
+                </tr>
+            </table>
+          </div>
+          </article>
+
+      </div>
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
 </div>
 </template>
 

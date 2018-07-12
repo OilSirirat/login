@@ -20,7 +20,7 @@
         </a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            Menu
+            Log
           </a>
           <div class="navbar-dropdown">
             <a class="navbar-item" @click= "href('/report')">
@@ -54,58 +54,28 @@
   </nav>
 <br><br>
   <div class="columns">
-    <div class="column is-three-quarters" style="margin-left: 2%; width: 68%;">
-        <div class="columns">
-          <div class="column">
-            <div class="notification">
-              26 C <br> status
-            </div>
-          </div>
-          <div class="column">
-            <div class="notification" >
-              50% C <br> status
-            </div>
-          </div>
-          <div class="column">
-            <div class="notification">
-              Time Now <br>
-              12:12  4-10-2018
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="column">
-
-    </div>
-  </div>
-
-  <div class="columns">
-    <div class="column is-three-quarters" style="margin-left: 2%; width: 68%;">
-      <div class="notification">
-        Time Now <br>
-        12:12  4-10-2018
-      </div>
-    </div>
-    <div class="column">
-      <div class="notification"  style="margin-right: 4%;">
-        <div class="field">
-          <div class="control">
-            <input class="input is-info is-rounded" type="text" placeholder="Start Time">
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <input class="input is-info is-rounded" type="text" placeholder="Stop Time">
-          </div>
-        </div>
-        <a class="button is-link is-rounded">Search</a>
+    <div class="column is-three-quarters" style="margin-left: 2%; width: 95%;">
+      <div class="notification" >
+        <a class="button is-danger is-outlined" style="  float: right;">Clear All</a> <br> <br>
+        <table class="table is-striped"  style="margin-left: 1%; width: 100%;">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Temperature</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+            <tr v-for = "(log, key) in log">
+              <td>{{log.time}}</td>
+              <td>{{log.temperature}}</td>
+              <td></td>
+              <td>{{log.time}}</td>
+            </tr>
+          </thead>
+        </table>
       </div>
     </div>
   </div>
-
-
-
-
   </div>
 <br><br><br>
 </div>
@@ -116,12 +86,7 @@ import firebase from 'firebase'
 export default {
   data () {
     return {
-      data: {
-        uasrname: '',
-        password: ''
-      },
-      shadmin: '',
-      sw: ''
+      log: ''
     }
   },
   created: function () {
@@ -130,33 +95,9 @@ export default {
   methods: {
     pullData () {
       let that = this
-      firebase.database().ref('/admin/').once('value').then(function (snapshot) {
-        that.shadmin = snapshot.val()
+      firebase.database().ref('/logDHT/').once('value').then(function (snapshot) {
+        that.log = snapshot.val()
       })
-    },
-    add () {
-      console.log('asd')
-      firebase.database().ref('admin').push(this.data)
-      this.data.uasrname = ''
-      this.data.password = ''
-      this.pullData()
-    },
-    Update (key, uasrname, password) {
-      this.sw = ''
-      firebase.database().ref('admin').child(key).update({
-        uasrname: uasrname,
-        password: password
-      })
-    },
-    Delete (key) {
-      firebase.database().ref('admin').child(key).remove()
-      this.pullData()
-    },
-    swap: function (key) {
-      this.sw = key
-    },
-    cancel () {
-      this.sw = ''
     },
     href (s) {
       this.$router.replace(s)
